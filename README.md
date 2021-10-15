@@ -15,4 +15,7 @@ Pre-design:
 Things to account for:
 
 1) Halving cycles
-2) 
+
+
+Order of tasks:
+
