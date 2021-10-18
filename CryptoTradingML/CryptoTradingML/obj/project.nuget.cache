@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OJruq71LPvoLtCTsb8OnRI/7SJwewN+lHMRJ3OL027Or49tizE4Dg+wp96bFF982ZYNs6Mcru1nRzal2xy1HTw==",
+  "dgSpecHash": "eLCJ6Z4tjTwc2ssJAz6U1nfaDvoeY/rG/p9vbuGAifxgpzf9U9q87DQCGXZcP8vrGOEUojn/BVYsLbRgoVGOZg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Natel\\Desktop\\Career\\Portfolio\\CryptoML\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj",
+  "projectFilePath": "C:\\CryptoTraderML\\cryptotrading\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

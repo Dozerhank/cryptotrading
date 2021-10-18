@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Natel\\Desktop\\Career\\Portfolio\\CryptoML\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj": {}
+    "C:\\CryptoTraderML\\cryptotrading\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Natel\\Desktop\\Career\\Portfolio\\CryptoML\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj": {
+    "C:\\CryptoTraderML\\cryptotrading\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Natel\\Desktop\\Career\\Portfolio\\CryptoML\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj",
+        "projectUniqueName": "C:\\CryptoTraderML\\cryptotrading\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj",
         "projectName": "CryptoTradingML",
-        "projectPath": "C:\\Users\\Natel\\Desktop\\Career\\Portfolio\\CryptoML\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj",
+        "projectPath": "C:\\CryptoTraderML\\cryptotrading\\CryptoTradingML\\CryptoTradingML\\CryptoTradingML.csproj",
         "packagesPath": "C:\\Users\\Natel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Natel\\Desktop\\Career\\Portfolio\\CryptoML\\CryptoTradingML\\CryptoTradingML\\obj\\",
+        "outputPath": "C:\\CryptoTraderML\\cryptotrading\\CryptoTradingML\\CryptoTradingML\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
