@@ -1,25 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.ML.Data;
+﻿using Microsoft.ML.Data;
 
 namespace CryptoTradingML
 {
-    class BitcoinData
+    public class BitcoinData
     {
         [LoadColumn(0)]
-        public string Date { get; set; }
+        public int Index { get; set; }
 
         [LoadColumn(1)]
-        public string Time { get; set; }
+        public string Date { get; set; }
 
         [LoadColumn(2)]
-        public float prevBitcoin { get; set; }
+        public string Time { get; set; }
 
         [LoadColumn(3)]
-        public float currBitcoin { get; set; }
+        public float prevBitcoin { get; set; }
 
         [LoadColumn(4)]
+        public float currBitcoin { get; set; }
+
+        [LoadColumn(5)]
         public float priceChange { get; set; }
+    }
+
+    public class BitcoinPrediction
+    {
+        [ColumnName("Index")]
+        public int IndexPre { get; set; }
+
+        [ColumnName("Buy/Sell/Pass")]
+        public string Decision { get; set; }
+
     }
 }

@@ -1,49 +1,75 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Microsoft.ML;
-using Microsoft.ML.Data;
-using static Microsoft.ML.DataOperationsCatalog;
-using Microsoft.ML.Trainers;
-using Microsoft.ML.Transforms.Text;
 
 namespace CryptoTradingML
 {
     class Program
     {
-        //Create a field to hold the data path
-        static readonly string dataPath = Path.Combine(Environment.CurrentDirectory, "Data", "BitcoinData.txt");
+        //Create a field to hold the data paths and trained model
+        static readonly string trainDataPath = Path.Combine(Environment.CurrentDirectory, "Data", "BitcoinTrain.csv");
+        static readonly string testDataPath = Path.Combine(Environment.CurrentDirectory, "Data", "BitcoinTest.csv");
+        static readonly string modelPath = Path.Combine(Environment.CurrentDirectory, "Data", "Model.zip");
 
         static void Main(string[] args)
         {
             //Initialize mlContext variable
-            MLContext mlContext = new MLContext();
-
-            //Load data file
-            TrainTestData splitDataView = LoadData(mlContext);
+            MLContext mlContext = new MLContext(seed: 0);
 
             //Train model
-            //ITransformer model = BuildAndTrainModel(mlContext, splitDataView.TrainSet);
+            var model = Train(mlContext, trainDataPath);
+
+            //Evaluate model
+            Evaluate(mlContext, model);
         }
 
-        public static TrainTestData LoadData(MLContext mlContext)
+        public static ITransformer Train(MLContext mlContext, string dataPath)
         {
-            //Define Schema and read the file
-            IDataView dataView = mlContext.Data.LoadFromTextFile<BitcoinData>(dataPath, hasHeader: true);
+            IDataView dataView = mlContext.Data.LoadFromTextFile<BitcoinData>(dataPath, hasHeader: true, separatorChar: ',');
+            var pipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "BitcoinTradeDecision")
+                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "DateEncoded", inputColumnName: "Date"))
+                .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "TimeEncoded", inputColumnName: "Time"))
+                .Append(mlContext.Transforms.Concatenate("Features", "DateEncoded", "TimeEncoded", "prevBitcoin", "currBitcoin", "priceChange"))
+                .Append(mlContext.Regression.Trainers.FastTree());
 
-            //Split data into training sets (80/20) 
-            TrainTestData splitDataView = mlContext.Data.TrainTestSplit(dataView, testFraction: 0.2);
-
-            //Return training set
-            return splitDataView;
+            var model = pipeline.Fit(dataView);
+            return model;
         }
 
-        /*
-        public static ITransformer BuildAndTrainModel(MLContext mlContext, IDataView splitTrainSet)
+        private static void Evaluate(MLContext mlContext, ITransformer model)
         {
+            IDataView dataView = mlContext.Data.LoadFromTextFile<BitcoinData>(testDataPath, hasHeader: true, separatorChar: ',');
+            var predictions = model.Transform(dataView);
+            var metrics = mlContext.Regression.Evaluate(predictions, "Index", "Buy/Sell/Pass");
 
+            Console.WriteLine();
+            Console.WriteLine($"*************************************************");
+            Console.WriteLine($"*       Model quality metrics evaluation         ");
+            Console.WriteLine($"*------------------------------------------------");
+            Console.WriteLine($"*       RSquared Score:      {metrics.RSquared:0.##}");
+            Console.WriteLine($"*       Root Mean Squared Error:      {metrics.RootMeanSquaredError:#.##}");
         }
-        */
+
+        private static void TestSinglePrediction(MLContext mlContext, ITransformer model)
+        {
+            TestSinglePrediction(mlContext, model);
+            var predictionFunction = mlContext.Model.CreatePredictionEngine<BitcoinData, BitcoinPrediction>(model);
+
+            var BitcoinPredictionSample = new BitcoinData()
+            {
+                Index = 1,
+                Date = "1/1/2021",
+                Time = "3:24pm",
+                prevBitcoin = 40000,
+                currBitcoin = 42000,
+                priceChange = 2000,
+            };
+
+            var prediction = predictionFunction.Predict(BitcoinPredictionSample);
+
+            Console.WriteLine($"**********************************************************************");
+            Console.WriteLine($"Predicted fare: {prediction.Decision:0.####}, actual fare: 15.5");
+            Console.WriteLine($"**********************************************************************");
+        }
     }
 }
