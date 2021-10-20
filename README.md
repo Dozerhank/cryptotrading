@@ -26,5 +26,4 @@ Goals (in order):
 Ideas for later:
 
 1) Lite version that allows users to use simulated trades
-2) Levels of agression for trades
-3) 
+2) Levels of agression for trade.
