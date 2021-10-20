@@ -22,3 +22,9 @@ Goals (in order):
 1) Successfully read bitcoin data
 2) Successfully train ML model
 3) Successfully get updated bitcoin prices and save into file with time and date
+
+Ideas for later:
+
+1) Lite version that allows users to use simulated trades
+2) Levels of agression for trades
+3) 
