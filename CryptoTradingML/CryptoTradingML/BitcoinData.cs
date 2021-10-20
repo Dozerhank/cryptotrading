@@ -1,4 +1,5 @@
-﻿using Microsoft.ML.Data;
+﻿using System;
+using Microsoft.ML.Data;
 
 namespace CryptoTradingML
 {
@@ -30,6 +31,34 @@ namespace CryptoTradingML
 
         [ColumnName("Buy/Sell/Pass")]
         public string Decision { get; set; }
+    }
 
+    class BitcoinDataPrep
+    {
+        string testDataFile { get; set; }
+        string newDataFile { get; set; }
+
+        public void prepareData()
+        {
+
+        }
+
+        public void addData(string d)
+        {
+
+        }
+
+        public string getData(int column, int row)
+        {
+            string result = "";
+
+            return result;
+        }
+
+        public float bitcoinPrice()
+        {
+            float result = 0.0f;
+            return result;
+        }
     }
 }

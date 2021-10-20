@@ -44,6 +44,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Coinbase.Pro": {
+              "target": "Package",
+              "version": "[4.1.3, )"
+            },
             "Microsoft.ML": {
               "target": "Package",
               "version": "[1.6.0, )"
